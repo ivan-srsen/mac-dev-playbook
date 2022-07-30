@@ -92,6 +92,8 @@ sublime_package_control:
   - "TrailingSpaces"
   - "WordCount"
 
+asdf_user: "ivansrsen"
+
 asdf_plugins:
   - name: "erlang"    # a plugin name
     repository: ""    # a plugin repository, optional
