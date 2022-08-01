@@ -51,6 +51,11 @@
         dest: "/Users/{{ lookup('env', 'USER') }}/.asdf"
         version: v0.10.2
 
+    - name: "Copy"
+      copy:
+        dest: /Users/{{ lookup('env', 'USER') }}/.zshrc
+        content: 'export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"'
+
     - name: "Install asdf plugins"
       shell: |
         source /Users/{{ lookup('env', 'USER') }}/.asdf/asdf.sh
