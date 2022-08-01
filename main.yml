@@ -24,7 +24,6 @@
     - role: geerlingguy.mac.dock
       when: configure_dock
       tags: ['dock']
-    - role: cimon-io.asdf
 
   tasks:
     - import_tasks: tasks/sudoers.yml
@@ -45,6 +44,30 @@
     - import_tasks: tasks/sublime-text.yml
       when: configure_sublime
       tags: ['sublime-text']
+
+    - git:
+        repo: https://github.com/asdf-vm/asdf.git
+        dest: "/Users/{{ lookup('env', 'USER') }}/.asdf"
+        version: latest
+
+    - name: "Install asdf plugins"
+      shell: |
+        source /Users/{{ lookup('env', 'USER') }}/.asdf/asdf.sh
+        asdf plugin-add {{ item }} || exit 0
+      with_items:
+        - nodejs
+        - erlang
+        - elixir
+
+    - name: "Install default asdf"
+      shell: |
+        source /Users/{{ lookup('env', 'USER') }}/.asdf/asdf.sh
+        asdf install nodejs 16.16.0
+        asdf global nodejs 16.16.0
+        asdf install erlang 25.0.2
+        asdf global erlang 25.0.2
+        asdf install elixir 1.13.4-otp-25
+        asdf global elixir 1.13.4-otp-25
 
     - block:
         - name: Run configured post-provision ansible task files.
