@@ -45,10 +45,11 @@
       when: configure_sublime
       tags: ['sublime-text']
 
+    #TODO checkout latest
     - git:
         repo: https://github.com/asdf-vm/asdf.git
         dest: "/Users/{{ lookup('env', 'USER') }}/.asdf"
-        version: latest
+        version: 0.10.2
 
     - name: "Install asdf plugins"
       shell: |
